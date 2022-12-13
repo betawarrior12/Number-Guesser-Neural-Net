@@ -19,15 +19,14 @@ failed = []
 
 # Try to open reqirements.txt file and read all required packages
 try:
-    file = open("requirements.txt", "r")
-    file_lines = file.readlines()
-    required = [line.strip().lower() for line in file_lines]
-    file.close()
+    with open("requirements.txt", "r") as file:
+        file_lines = file.readlines()
+        required = [line.strip().lower() for line in file_lines]
 except FileNotFoundError:
     print("[ERROR] No requiremnts.txt file found")
 
 
-if len(required) > 0:
+if required:
     print("[INPUT] You are about to install", len(required), "packages, would you like to proceed (y/n):", end=" ")
     ans = input()
 
@@ -59,13 +58,13 @@ if len(required) > 0:
                 except Exception as e:
                     print("[ERROR] Could not install", package, "-", e)
                     failed.append(package)
-                        
+
     else:
         print("[STOP] Operation terminated by user")
 else:
     print("[LOG] No packages to install")
 
-if len(failed) > 0:
+if failed:
     print("[FAILED]", len(failed), "package(s) were not installed. Failed package install(s):", end=" ")
     for x, package in enumerate(failed):
         if x != len(failed) -1:
