@@ -36,5 +36,5 @@ for x in range(len(predictions)):
     plt.show()
 
 print("The program got", count, 'wrong, out of', len(x_test))
-print(str(100 - ((count/len(x_test))*100)) + '% correct')
+print(f'{str(100 - count / len(x_test) * 100)}% correct')
 

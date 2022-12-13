@@ -55,17 +55,16 @@ class pixel(object):
             self.neighbors.append(g.pixels[i - 1][j])
         if j < rows - 1:  # Up
             self.neighbors.append(g.pixels[i][j + 1])
-        if j > 0:  # Down
+        if j > 0:
             self.neighbors.append(g.pixels[i][j - 1])
 
-        # Diagonal neighbors
-        if j > 0 and i > 0:  # Top Left
-            self.neighbors.append(g.pixels[i - 1][j - 1])
+            if i > 0:
+                self.neighbors.append(g.pixels[i - 1][j - 1])
 
-        if j + 1 < rows and i > -1 and i - 1 > 0:  # Bottom Left
+        if j + 1 < rows and i > -1 and i > 1:  # Bottom Left
             self.neighbors.append(g.pixels[i - 1][j + 1])
 
-        if j - 1 < rows and i < cols - 1 and j - 1 > 0:  # Top Right
+        if j - 1 < rows and i < cols - 1 and j > 1:  # Top Right
             self.neighbors.append(g.pixels[i + 1][j - 1])
 
         if j < rows - 1 and i < cols - 1:  # Bottom Right
@@ -82,7 +81,6 @@ class grid(object):
         self.width = width
         self.height = height
         self.generatePixels()
-        pass
 
     def draw(self, surface):
         for row in self.pixels:
@@ -117,7 +115,7 @@ class grid(object):
     def convert_binary(self):
         li = self.pixels
 
-        newMatrix = [[] for x in range(len(li))]
+        newMatrix = [[] for _ in range(len(li))]
 
         for i in range(len(li)):
             for j in range(len(li[i])):
@@ -145,7 +143,7 @@ def guess(li):
     print("I predict this number is a:", t)
     window = Tk()
     window.withdraw()
-    messagebox.showinfo("Prediction", "I predict this number is a: " + str(t))
+    messagebox.showinfo("Prediction", f"I predict this number is a: {str(t)}")
     window.destroy()
     #plt.imshow(li[0], cmap=plt.cm.binary)
     #plt.show()
